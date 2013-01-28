@@ -6,7 +6,7 @@
  *
  */
 class OAuth2ServerException extends Exception {
-	
+
 	protected $httpCode;
 	protected $errorData = array();
 
@@ -21,28 +21,28 @@ class OAuth2ServerException extends Exception {
 	 * occurred.
 	 */
 	public function __construct($http_status_code, $error, $error_description = NULL) {
-		parent::__construct($error);
-		
-		$this->httpCode = $http_status_code;
-		
-		$this->errorData['error'] = $error;
-		if ($error_description) {
-			$this->errorData['error_description'] = $error_description;
-		}
+	parent::__construct($error);
+
+	$this->httpCode = $http_status_code;
+
+	$this->errorData['error'] = $error;
+	if ($error_description) {
+		$this->errorData['error_description'] = $error_description;
+	}
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getDescription() {
-		return isset($this->errorData['error_description']) ? $this->errorData['error_description'] : null;
+	return isset($this->errorData['error_description']) ? $this->errorData['error_description'] : null;
 	}
 
 	/**
-	 * @return string 
+	 * @return string
 	 */
 	public function getHttpCode() {
-		return $this->httpCode;
+	return $this->httpCode;
 	}
 
 	/**
@@ -54,10 +54,10 @@ class OAuth2ServerException extends Exception {
 	 * @ingroup oauth2_error
 	 */
 	public function sendHttpResponse() {
-		header("HTTP/1.1 " . $this->httpCode);
-		$this->sendHeaders();
-		echo (string) $this;
-		exit();
+	header("HTTP/1.1 " . $this->httpCode);
+	$this->sendHeaders();
+	echo (string) $this;
+	exit();
 	}
 
 	/**
@@ -69,14 +69,14 @@ class OAuth2ServerException extends Exception {
 	 * @ingroup oauth2_section_5
 	 */
 	protected function sendHeaders() {
-		header("Content-Type: application/json");
-		header("Cache-Control: no-store");
+	header("Content-Type: application/json");
+	header("Cache-Control: no-store");
 	}
 
 	/**
 	 * @see Exception::__toString()
 	 */
 	public function __toString() {
-		return json_encode($this->errorData);
+	return json_encode($this->errorData);
 	}
 }

@@ -9,11 +9,11 @@
  * @ingroup oauth2_error
  */
 class OAuth2AuthenticateException extends OAuth2ServerException {
-	
+
 	protected $header;
 
 	/**
-	 * 
+	 *
 	 * @param $http_status_code
 	 * HTTP status code message as predefined.
 	 * @param $error
@@ -28,17 +28,17 @@ class OAuth2AuthenticateException extends OAuth2ServerException {
 	 * of the access token for accessing the requested resource.
 	 */
 	public function __construct($httpCode, $tokenType, $realm, $error, $error_description = NULL, $scope = NULL) {
-		parent::__construct($httpCode, $error, $error_description);
-		
-		if ($scope) {
-			$this->errorData['scope'] = $scope;
-		}
-		
-		// Build header
-		$this->header = sprintf('WWW-Authenticate: %s realm="%s"', ucwords($tokenType), $realm);
-		foreach ( $this->errorData as $key => $value ) {
-			$this->header .= ", $key=\"$value\"";
-		}
+	parent::__construct($httpCode, $error, $error_description);
+
+	if ($scope) {
+		$this->errorData['scope'] = $scope;
+	}
+
+	// Build header
+	$this->header = sprintf('WWW-Authenticate: %s realm="%s"', ucwords($tokenType), $realm);
+	foreach ( $this->errorData as $key => $value ) {
+		$this->header .= ", $key=\"$value\"";
+	}
 	}
 
 	/**
@@ -50,6 +50,6 @@ class OAuth2AuthenticateException extends OAuth2ServerException {
 	 * @ingroup oauth2_section_5
 	 */
 	protected function sendHeaders() {
-		header($this->header);
+	header($this->header);
 	}
 }

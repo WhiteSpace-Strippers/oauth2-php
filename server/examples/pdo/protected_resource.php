@@ -27,9 +27,9 @@ try {
 
 <html>
 	<head>
-		<title>Hello!</title>
+	<title>Hello!</title>
 	</head>
 	<body>
-		<p>This is a secret.</p>
+	<p>This is a secret.</p>
 	</body>
 </html>

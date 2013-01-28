@@ -5,7 +5,7 @@
  */
 
 class All_OAuth2_Tests extends PHPUnit_Framework_TestSuite {
-  
+
   /**
    * Constructs the test suite handler.
    */
@@ -18,7 +18,7 @@ class All_OAuth2_Tests extends PHPUnit_Framework_TestSuite {
       $this->addTestSuite($class);
     }
   }
-  
+
   /**
    * Creates the suite.
    */
